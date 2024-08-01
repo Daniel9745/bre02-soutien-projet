@@ -7,7 +7,7 @@ abstract class AbstractController
     public function __construct()
     {
         $loader = new \Twig\Loader\FilesystemLoader('templates');
-        $twig = new \Twig\Environment($loader,[
+        $twig = new \Twig\Environment($loader, [
             'debug' => true,
         ]);
 
@@ -16,8 +16,17 @@ abstract class AbstractController
         $this->twig = $twig;
     }
 
-    protected function render(string $template, array $data) : void
+    protected function render(string $template, array $data): void
     {
         echo $this->twig->render($template, $data);
+    }
+
+    protected function redirect(?string $route): void
+    {
+        if ($route !== null) {
+            header(`Location: index.php?route=$route`);
+        } else {
+            header(`Location: index.php`);
+        }
     }
 }

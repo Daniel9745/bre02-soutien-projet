@@ -1,0 +1,46 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block main %}
+    <main class="container py-5">
+        <h1 class="mb-4">Liste des utilisateurs</h1>
+        <a href="index.php?route=admin-create-user" class="btn btn-primary mb-4">Ajouter un utilisateur</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for userslist in users%}
+                <tr>
+                    <td>
+                        {{userslist.id}}
+                    </td>
+                    <td>
+                        {{userslist.email}}
+                    </td>
+                    <td>
+                        {{userslist.role}}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="index.php?route=admin-show-user" title="Voir l'utilisateur"><span class="bi bi-eye-fill" aria-hidden="true"></span></a>
+                        <a class="btn btn-success" href="index.php?route=admin-edit-user" title="Modifier l'utilisateur"><span class="bi bi-pencil-fill" aria-hidden="true"></span></a>
+                        <a class="btn btn-danger" href="index.php?route=admin-delete-user" title="Supprimer l'utilisateur"><span class="bi bi-trash-fill" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+               {%endfor%}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}
