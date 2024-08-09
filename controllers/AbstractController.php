@@ -10,7 +10,7 @@ abstract class AbstractController
         $twig = new \Twig\Environment($loader, [
             'debug' => true,
         ]);
-
+        $twig->addGlobal('session', $_SESSION);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
 
         $this->twig = $twig;
@@ -24,9 +24,11 @@ abstract class AbstractController
     protected function redirect(?string $route): void
     {
         if ($route !== null) {
-            header(`Location: index.php?route=$route`);
+            header("Location: index.php?route=$route");
+            exit;
         } else {
-            header(`Location: index.php`);
+            header("Location: index.php");
+            exit;
         }
     }
 }
